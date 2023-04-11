@@ -1,0 +1,64 @@
+genuine-doc:
+  enabled: true
+  nameOverride: genuine-doc
+  podDisruptionBudget:
+    enabled: false
+  pods:
+    strategy:
+      type: Recreate
+    controller: deployment
+    image:
+      name: nginx
+      tag: "1.23.3"
+    ports:
+      - containerPort: 80
+    additionalContainers:
+      - name: rclone
+        image: rclone/rclone:1.62.2
+        command: ["/bin/sh", "-c", "/scripts/run.bash"]
+        volumeMounts:
+          - name: config
+            mountPath: /config/rclone
+          - name: scripts
+            mountPath: /scripts
+            readOnly: true
+          - mountPath: "/data"
+            name: data
+    env:
+      - name: DUMMY_ENV
+        value: "002"
+    volumes:
+      - name: config
+        secret:
+          secretName: rclone-config
+          optional: false
+      - name: scripts
+        configMap:
+          name: rclone-script-cm
+          defaultMode: 0744
+      - name: nginx-cfg
+        configMap:
+          name: nginx-conf-cm
+      - name: nginx-web
+        configMap:
+          name: nginx-web-cm
+      - name: data
+        persistentVolumeClaim:
+          claimName: rclone-data
+    volumeMounts:
+      - mountPath: "/data"
+        name: data
+      - mountPath: "/etc/nginx"
+        name: nginx-cfg
+      - mountPath: "/www"
+        name: nginx-web
+
+  ingress:
+    enabled: false
+  service:
+    enabled: true
+    ports:
+      - port: 80
+        targetPort: 80
+        protocol: TCP
+        name: http

@@ -1,0 +1,12 @@
+envAlias: dev
+
+genuine-doc:
+  ingress:
+    enabled: true
+    service:
+      name: genuine-dev-genuine-doc
+      port:
+        name: http
+
+    hosts:
+      - docs.genuine-dev.napbiotec.io
