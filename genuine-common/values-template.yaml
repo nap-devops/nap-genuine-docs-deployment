@@ -1,0 +1,4 @@
+genuine-doc:
+  pods:
+    image:
+      tag: "<<genuine-docs-image-tag>>"

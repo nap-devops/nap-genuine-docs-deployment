@@ -1,0 +1,12 @@
+envAlias: prod
+
+genuine-doc:
+  ingress:
+    enabled: true
+    service:
+      name: genuine-prod-genuine-doc
+      port:
+        name: http
+
+    hosts:
+      - docs.genuine.napbiotec.io
