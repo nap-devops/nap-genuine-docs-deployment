@@ -4,14 +4,14 @@ genuine-doc:
   podDisruptionBudget:
     enabled: false
   pods:
-    strategy:
-      type: Recreate
+    #strategy:
+    #  type: Recreate
     controller: deployment
     image:
-      name: nginx
-      tag: "1.23.3"
+      name: gcr.io/its-artifact-commons/jenuine-docs
+      tag: "will-change"
     ports:
-      - containerPort: 80
+      - containerPort: 3030
     additionalContainers:
       - name: rclone
         image: rclone/rclone:1.62.2
@@ -59,6 +59,6 @@ genuine-doc:
     enabled: true
     ports:
       - port: 80
-        targetPort: 80
+        targetPort: 3030
         protocol: TCP
         name: http
