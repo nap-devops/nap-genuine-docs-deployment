@@ -1,4 +1,4 @@
 genuine-doc:
   pods:
     image:
-      tag: "develop-779ff2d"
+      tag: "main-9358fab"
