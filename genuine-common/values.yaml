@@ -4,8 +4,8 @@ genuine-doc:
   podDisruptionBudget:
     enabled: false
   pods:
-    #strategy:
-    #  type: Recreate
+    strategy:
+      type: Recreate
     controller: deployment
     image:
       name: gcr.io/its-artifact-commons/jenuine-docs
