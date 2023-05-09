@@ -1,4 +1,4 @@
 genuine-doc:
   pods:
     image:
-      tag: "develop-bcc0269"
+      tag: "develop-ebc79ff"
